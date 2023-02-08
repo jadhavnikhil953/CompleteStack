@@ -1,6 +1,7 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import{ MatDialog} from '@angular/material/dialog';
 import { DataService } from '../data.service';
+import * as crypto from "crypto-js";
 
 @Component({
   selector: 'app-practice',
@@ -58,6 +59,11 @@ export class PracticeComponent implements OnInit {
     // dialog.afterClosed().subscribe(result => {
     //   console.log(`Dialog result: ${result}`);
     // });
+    let encryptedPassword = crypto.AES.encrypt("MyPassword", "MySecretKey").toString();
+
+    this.dataService.login({cipher:encryptedPassword}).subscribe((data:any) =>{
+      console.log(data)
+    });
     this.clearAll();
     this.table_all = true;
     if(this.orders_all.length == 0){
