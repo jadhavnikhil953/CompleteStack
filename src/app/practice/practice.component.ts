@@ -1,5 +1,5 @@
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
-import{ MatDialog} from '@angular/material/dialog';
+import { Component, ElementRef, Inject, OnInit, ViewChild } from '@angular/core';
+import{ MatDialog, MAT_DIALOG_DATA} from '@angular/material/dialog';
 import { DataService } from '../data.service';
 import * as crypto from "crypto-js";
 
@@ -125,7 +125,7 @@ export class PracticeComponent implements OnInit {
 })
 export class DialogContentExampleDialog {
   output : any;
-  constructor( private dataService: DataService){
+  constructor( private dataService: DataService, @Inject(MAT_DIALOG_DATA) public data: any){
     //this.fire();
   }
   ngOnInit(): void {
@@ -136,7 +136,7 @@ export class DialogContentExampleDialog {
       this.output = data[0].postName;
     });
     this.dataService.getAllOrders({}).subscribe((data:any) =>{
-      console.log(data);
+      //console.log(data);
     });
     //console.log(this.output)
     let k = 3;
@@ -183,6 +183,6 @@ export class DialogContentExampleDialog {
         index = i+1;
       }
     }
-    console.log(finalCount)
+    //console.log(finalCount)
   }
 }

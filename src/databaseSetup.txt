@@ -10,3 +10,12 @@ db.orders.insertMany([
    { _id: 9, cust_id: "Don Quis", ord_date: new Date("2020-03-20"), price: 55, items: [ { sku: "carrots", qty: 5, price: 1.0 }, { sku: "apples", qty: 10, price: 2.5 }, { sku: "oranges", qty: 10, price: 2.5 } ], status: "A" },
    { _id: 10, cust_id: "Don Quis", ord_date: new Date("2020-03-23"), price: 25, items: [ { sku: "oranges", qty: 10, price: 2.5 } ], status: "A" }
 ])
+
+db.users.insert([{
+    uname:"jadhavnikhil9953@gmail.com",
+    firstName:"Nikhil",
+    lastName:"Jadhav",
+    isTempPw:false,
+    pw:"bp2L3LLOIv+47QkABXJh0o/DjAYk0nRTqMqzlVJTYDg="
+}])
+//Password = Lihkin@18

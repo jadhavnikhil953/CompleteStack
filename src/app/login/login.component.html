@@ -111,9 +111,10 @@ window.onclick = function(event) {
   <p class='msg'>Welcome back</p>
   <div class='form'>
     <form>
-  <input type="text" placeholder='Username' class='text' id='username' required><br>
-  <input type="password" placeholder='Password' class='password'><br>
-  <a href="#" class='btn-login' id='do-login'>Login</a>
+  <input type="text" placeholder='Username' class='text' [(ngModel)]='uname' id='username' required><br>
+  <input type="password" placeholder='Password' class='password' [(ngModel)]='pw' id='password'><br>
+  <!-- <a href="#" class='btn-login' id='do-login'>Login</a> -->
+  <button class='btn-login' (click)="login();" style="width:auto;">Login</button> <span style="display: inline-block; width: 10px;"></span>
   <button class='btn-login' onclick="document.getElementById('signup').style.display='block'" style="width:auto;">Sign Up</button>
   <a href="#" class='forgot'>Forgot?</a>
     </form>

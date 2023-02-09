@@ -4,6 +4,7 @@ var router = express.Router();
 const Posts = require ( '../backend/models/post');
 const Orders = require('../backend/models/orders');
 var CryptoJS = require('../node_modules/crypto-js');
+const Users = require('../backend/models/users');
 
 
 // Routes
@@ -18,15 +19,30 @@ router.post('/products',(req, res) => {
 });
 
 router.post('/login',(req, res) => {
+    var uname = req.body.uname;
+    var savedPw = "";
+
     var bytes  = CryptoJS.AES.decrypt(req.body.cipher, "MySecretKey");
     var originalPassword = bytes.toString(CryptoJS.enc.Utf8);
-    console.log(originalPassword)
 
     var hash = CryptoJS.HmacSHA256(originalPassword, "decryptThisBitch");
-    //var hash = CryptoJS.SHA256(password);
     var hashedString = hash.toString(CryptoJS.enc.Base64);
-    //console.log(hash)
-    res.send({hashedString:hashedString});
+
+    Users.find({uname:uname}, (error, result) => {
+        if(error) {
+            return res.send(error);
+        }
+        if(result.length == 0){
+            return res.send({ success:false,message:"User not found"});
+        }
+        savedPw = result[0].pw;
+        if(hashedString == savedPw){
+            return res.send({success:true,message:"Login Successful"});
+        }
+        else{
+            return res.send({success:false,message:"Incorrect Password"});
+        }
+    });
  });
 
  router.post('/getAllOrders',(req, res) => {
