@@ -12,12 +12,13 @@ import {MatNativeDateModule} from '@angular/material/core';
 import {HttpClientModule} from '@angular/common/http';
 import {MatTableModule} from '@angular/material/table';
 import * as CanvasJSAngularChart from '../assets/canvasjs-3.7.2/canvasjs.angular.component';
+import { LoginComponent } from './login/login.component';
 var CanvasJSChart = CanvasJSAngularChart.CanvasJSChart;
 
 @NgModule({
   declarations: [
     AppComponent,
-    PracticeComponent,DialogContentExampleDialog,CanvasJSChart
+    PracticeComponent,DialogContentExampleDialog,CanvasJSChart, LoginComponent
   ],
   imports: [
     BrowserModule,
