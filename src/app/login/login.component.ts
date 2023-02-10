@@ -3,6 +3,7 @@ import { DataService } from '../data.service';
 import * as crypto from "crypto-js";
 import{ MatDialog} from '@angular/material/dialog';
 import { DialogContentExampleDialog } from '../practice/practice.component';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -12,7 +13,7 @@ import { DialogContentExampleDialog } from '../practice/practice.component';
 export class LoginComponent implements OnInit {
   public uname: any = "";
   public pw: any = "";
-  constructor( private dataService : DataService, private dialogRef : MatDialog) { }
+  constructor( private dataService : DataService, private dialogRef : MatDialog, private router : Router) { }
 
   ngOnInit(): void {
   }
@@ -56,6 +57,9 @@ export class LoginComponent implements OnInit {
                 dialog.afterClosed().subscribe(result => {
                   //console.log(`Dialog result: ${result}`);
                 });
+            }
+            else{
+              this.router.navigate(['practice']);
             }
           });
         }

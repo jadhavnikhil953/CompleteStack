@@ -12,7 +12,7 @@ db.orders.insertMany([
 ])
 
 db.users.insert([{
-    uname:"jadhavnikhil9953@gmail.com",
+    uname:"jadhavnikhil953@gmail.com",
     firstName:"Nikhil",
     lastName:"Jadhav",
     isTempPw:false,
