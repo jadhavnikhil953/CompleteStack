@@ -13,10 +13,29 @@ import { Router } from '@angular/router';
 export class LoginComponent implements OnInit {
   public uname: any = "";
   public pw: any = "";
+
+  public uname_new: any = "";
+  public pw_new: any = "";
+  public pw_repeat: any = "";
+
   constructor( private dataService : DataService, private dialogRef : MatDialog, private router : Router) { }
 
   ngOnInit(): void {
   }
+
+  signUp(){
+    console.log(this.uname_new);
+    if(this.pw_new == this.pw_repeat){
+      console.log("pw matches")
+      this.dataService.signUp({uname:this.uname_new}).subscribe((data:any) =>{
+        console.log(data);
+      });
+    }
+    else{
+      console.log("pw mismatch")
+    }
+  }
+
   login(){
     if(this.uname == ""){
     // This is to display dialog box

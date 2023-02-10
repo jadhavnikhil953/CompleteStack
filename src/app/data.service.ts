@@ -27,4 +27,8 @@ login(data: any): Observable<any>{
   return this.http.request('POST', this.url+'/api/login', 
   {responseType:'json', headers: {'Content-Type': 'application/json'},body:data});
 }
+signUp(data: any): Observable<any>{
+  return this.http.request('POST', this.url+'/api/signUp', 
+  {responseType:'json', headers: {'Content-Type': 'application/json'},body:data});
+}
 }

@@ -59,11 +59,11 @@ export class PracticeComponent implements OnInit {
     // dialog.afterClosed().subscribe(result => {
     //   console.log(`Dialog result: ${result}`);
     // });
-    let encryptedPassword = crypto.AES.encrypt("MyPassword", "MySecretKey").toString();
+    // let encryptedPassword = crypto.AES.encrypt("MyPassword", "MySecretKey").toString();
 
-    this.dataService.login({cipher:encryptedPassword}).subscribe((data:any) =>{
-      console.log(data)
-    });
+    // this.dataService.login({cipher:encryptedPassword}).subscribe((data:any) =>{
+    //   console.log(data)
+    // });
     this.clearAll();
     this.table_all = true;
     if(this.orders_all.length == 0){

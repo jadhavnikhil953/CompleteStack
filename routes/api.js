@@ -45,6 +45,22 @@ router.post('/login',(req, res) => {
     });
  });
 
+ router.post('/signUp',(req, res) => {
+    //console.log(req.body);
+    Users.find({uname:req.body.uname}, (error, result) => {
+       if(error) {
+           return res.status(500).send(error);
+       }
+       if(result.length>0)
+       {
+        res.send({success:false,message:"User already exists"});
+       }
+       else{
+        //insert into Users table
+       }
+   });
+ });
+
  router.post('/getAllOrders',(req, res) => {
     //console.log(req.body);
     Orders.find({}, (error, result) => {
