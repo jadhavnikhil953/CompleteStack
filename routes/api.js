@@ -57,6 +57,14 @@ router.post('/login',(req, res) => {
        }
        else{
         //insert into Users table
+        var bytes  = CryptoJS.AES.decrypt(req.body.cipher, "MySecretKey");
+        var originalPassword = bytes.toString(CryptoJS.enc.Utf8);
+
+        var hash = CryptoJS.HmacSHA256(originalPassword, "decryptThisBitch");
+        var hashedString = hash.toString(CryptoJS.enc.Base64);
+        Users.insertMany({uname:req.body.uname,firstName:"Temp",lastName:"User",pw:hashedString,isTempPw:true}, (error, result) => {
+            res.send({success:true,message:"User create successfully"});
+        });
        }
    });
  });

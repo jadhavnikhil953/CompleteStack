@@ -13,7 +13,6 @@ import { Router } from '@angular/router';
 export class LoginComponent implements OnInit {
   public uname: any = "";
   public pw: any = "";
-
   public uname_new: any = "";
   public pw_new: any = "";
   public pw_repeat: any = "";
@@ -24,15 +23,30 @@ export class LoginComponent implements OnInit {
   }
 
   signUp(){
-    console.log(this.uname_new);
     if(this.pw_new == this.pw_repeat){
-      console.log("pw matches")
-      this.dataService.signUp({uname:this.uname_new}).subscribe((data:any) =>{
-        console.log(data);
+      let encryptedPassword = crypto.AES.encrypt(this.pw_new, "MySecretKey").toString();
+      this.dataService.signUp({uname:this.uname_new, cipher:encryptedPassword}).subscribe((data:any) =>{
+        let dialog = this.dialogRef.open(DialogContentExampleDialog, {
+          data: {
+            message: data.message
+          }
+        });
+        dialog.afterClosed().subscribe(result => {
+          //console.log(`Dialog result: ${result}`);
+          let isVisible = document.getElementById('signup');
+          isVisible?.style.setProperty('display','none');
+        });
       });
     }
     else{
-      console.log("pw mismatch")
+      let dialog = this.dialogRef.open(DialogContentExampleDialog, {
+        data: {
+          message: "Password doesn't match"
+        }
+      });
+      dialog.afterClosed().subscribe(result => {
+        //console.log(`Dialog result: ${result}`);
+      });
     }
   }
 

@@ -129,7 +129,7 @@ export class DialogContentExampleDialog {
     //this.fire();
   }
   ngOnInit(): void {
-    this.fire();
+    //this.fire();
   }
   fire(){
     this.dataService.getPosts({postName:"test"}).subscribe((data:any) =>{
