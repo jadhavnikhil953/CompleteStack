@@ -21,9 +21,13 @@ export class PracticeComponent implements OnInit {
   table_all: boolean = false;
   mapReduceFlag: boolean = false;
   chart: any;
+  pw_current: any;
+  pw_new: any;
+  pw_confirm: any;
   chartData : any []=[];
   chartLabel: any[]=[];
   chartRef:any;	
+  currentUser: any;
   chartOptions = {
     title:{
       text: "Total Impressions by Platforms"
@@ -47,9 +51,15 @@ export class PracticeComponent implements OnInit {
     }]
   }
   constructor( private dialogRef : MatDialog, private dataService: DataService) { 
+    this.currentUser = this.dataService.getCurrentUser();
   }
 
   ngOnInit(): void {
+  }
+
+  changePassword(){
+    console.log("inside change password")
+    console.log(this.currentUser.email)
   }
 
   getAllOrders(){
