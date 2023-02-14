@@ -28,6 +28,12 @@ router.post('/login',(req, res) => {
     var hash = CryptoJS.HmacSHA256(originalPassword, "decryptThisBitch");
     var hashedString = hash.toString(CryptoJS.enc.Base64);
 
+    var user = {
+        email:"",
+        firstName:"",
+        lastName:""
+    }
+
     Users.find({uname:uname}, (error, result) => {
         if(error) {
             return res.send(error);
@@ -37,7 +43,10 @@ router.post('/login',(req, res) => {
         }
         savedPw = result[0].pw;
         if(hashedString == savedPw){
-            return res.send({success:true,message:"Login Successful"});
+            user.email = result[0].uname;
+            user.firstName = result[0].firstName;
+            user.lastName = result[0].lastName; 
+            return res.send({success:true,message:"Login Successful",user:user});
         }
         else{
             return res.send({success:false,message:"Incorrect Password"});

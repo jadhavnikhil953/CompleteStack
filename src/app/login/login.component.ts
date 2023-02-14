@@ -80,7 +80,7 @@ export class LoginComponent implements OnInit {
           // This is login api call
           let encryptedPassword = crypto.AES.encrypt(this.pw, "MySecretKey").toString();
           this.dataService.login({uname:this.uname,cipher:encryptedPassword}).subscribe((data:any) =>{
-            console.log(data)
+            //console.log(data)
             if(!data.success){
                 let dialog = this.dialogRef.open(DialogContentExampleDialog, {
                   data: {
@@ -92,6 +92,8 @@ export class LoginComponent implements OnInit {
                 });
             }
             else{
+              this.dataService.setCurrentUser(data.user);
+              console.log(this.dataService.getCurrentUser())
               this.router.navigate(['practice']);
             }
           });

@@ -301,8 +301,18 @@
       alt="IIT Logo"
       src="https://w7.pngwing.com/pngs/125/426/png-transparent-illinois-institute-of-technology-chicago-kent-college-of-law-university-of-illinois-at-chicago-law-college-others-angle-text-triangle.png"
     />
-    <span>Welcome :Big Data Technology</span>
+    <span>Welcome : {{currentUser.firstName}} {{currentUser.lastName}}</span>
       <div class="spacer"></div>
+      <!-- <a style="color: white;" title="User Name"> {{currentUser.firstName}}
+      </a> -->
+      <button style="line-height: 0px;" mat-button [matMenuTriggerFor]="menu">
+        <img style="height: 20px; width: 20px;" src="https://cdn-icons-png.flaticon.com/512/2782/2782911.png" alt="">
+      </button>
+      <mat-menu #menu="matMenu">
+        <button mat-menu-item>{{currentUser.firstName}}</button>
+        <button onclick="document.getElementById('signup').style.display='block'" mat-menu-item>Change Password</button>
+      </mat-menu>
+
       <a aria-label="IIT on twitter" target="_blank" rel="noopener" href="https://twitter.com/illinoistech" title="Twitter">
         <svg id="twitter-logo" height="24" data-name="Logo" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400">
           <rect width="400" height="400" fill="none"/>
@@ -315,6 +325,34 @@
           <path d="M21.58 7.19c-.23-.86-.91-1.54-1.77-1.77C18.25 5 12 5 12 5s-6.25 0-7.81.42c-.86.23-1.54.91-1.77 1.77C2 8.75 2 12 2 12s0 3.25.42 4.81c.23.86.91 1.54 1.77 1.77C5.75 19 12 19 12 19s6.25 0 7.81-.42c.86-.23 1.54-.91 1.77-1.77C22 15.25 22 12 22 12s0-3.25-.42-4.81zM10 15V9l5.2 3-5.2 3z"/>
         </svg>
       </a>
+      <a href="" title="Logout">
+        <img style="height: 20px; width: 20px;" src="https://cdn-icons-png.flaticon.com/512/992/992680.png" alt="">
+      </a>
+  </div>
+
+  <div id="signup" class="modal">
+    <span onclick="document.getElementById('signup').style.display='none'" class="close" title="Close Modal">&times;</span>
+    <form class="modal-content" action="/action_page.php">
+      <div class="container">
+        <h1 style="color: black;">Change Password</h1>
+        <p style="color: black;">Please fill in this form to change password.</p>
+        <hr>
+        <label style="color: black;" for="email"><b>Current Password</b></label>
+        <input style="max-width: -webkit-fill-available;" type="text" placeholder="Enter Current Password" name="email" [(ngModel)]='pw_current' required>
+  
+        <label style="color: black;" for="psw"><b>New Password</b></label>
+        <input style="max-width: -webkit-fill-available;" type="password" placeholder="Enter New Password" name="psw" [(ngModel)]='pw_new' required>
+  
+        <label style="color: black;" for="psw-repeat"><b>Confirm Password</b></label>
+        <input style="max-width: -webkit-fill-available;" type="password" placeholder="Repeat Password" name="psw-repeat" [(ngModel)]='pw_confirm' required>
+        
+  
+        <div class="clearfix">
+            <button type="submit" class="signupbtn" (click)="changePassword();">Change Password</button>
+          <button type="button" onclick="document.getElementById('signup').style.display='none'" class="cancelbtn">Cancel</button>
+        </div>
+      </div>
+    </form>
   </div>
   
   <div class="content" role="main">

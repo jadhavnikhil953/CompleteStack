@@ -7,6 +7,11 @@ import { Observable } from 'rxjs';
 })
 export class DataService {
   url = "http://localhost:4200";
+  currerntUser: any = {
+    email:"",
+    firstname:"",
+    lastName:""
+  };
 
   constructor(private http : HttpClient) { }
 
@@ -30,5 +35,11 @@ login(data: any): Observable<any>{
 signUp(data: any): Observable<any>{
   return this.http.request('POST', this.url+'/api/signUp', 
   {responseType:'json', headers: {'Content-Type': 'application/json'},body:data});
+}
+getCurrentUser(){
+  return this.currerntUser;
+}
+setCurrentUser(user:any){
+  this.currerntUser = user;
 }
 }

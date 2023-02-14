@@ -13,6 +13,7 @@ import {HttpClientModule} from '@angular/common/http';
 import {MatTableModule} from '@angular/material/table';
 import * as CanvasJSAngularChart from '../assets/canvasjs-3.7.2/canvasjs.angular.component';
 import { LoginComponent } from './login/login.component';
+import {MatMenuModule} from '@angular/material/menu';
 var CanvasJSChart = CanvasJSAngularChart.CanvasJSChart;
 
 @NgModule({
@@ -30,7 +31,8 @@ var CanvasJSChart = CanvasJSAngularChart.CanvasJSChart;
     MatNativeDateModule,
     HttpClientModule,
     BrowserAnimationsModule,
-    MatTableModule
+    MatTableModule,
+    MatMenuModule
   ],
   providers: [],
   bootstrap: [AppComponent]
