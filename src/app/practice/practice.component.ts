@@ -58,8 +58,6 @@ export class PracticeComponent implements OnInit {
   }
 
   changePassword(){
-    console.log("inside change password")
-    console.log(this.currentUser.email)
     if(this.pw_current == ""){
       let dialog = this.dialogRef.open(DialogContentExampleDialog, {
         data: {
@@ -84,7 +82,6 @@ export class PracticeComponent implements OnInit {
       else{
         let encryptedPassword = crypto.AES.encrypt(this.pw_confirm, "MySecretKey").toString();
         this.dataService.changePassword({uname:this.currentUser.email,cipher:encryptedPassword}).subscribe(result => {
-          console.log(result)
           if(result.success){
             let dialog = this.dialogRef.open(DialogContentExampleDialog, {
               data: {
