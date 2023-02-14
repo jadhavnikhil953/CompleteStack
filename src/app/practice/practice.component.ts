@@ -21,9 +21,9 @@ export class PracticeComponent implements OnInit {
   table_all: boolean = false;
   mapReduceFlag: boolean = false;
   chart: any;
-  pw_current: any;
-  pw_new: any;
-  pw_confirm: any;
+  pw_current: any = "";
+  pw_new: any = "";
+  pw_confirm: any = "";
   chartData : any []=[];
   chartLabel: any[]=[];
   chartRef:any;	
@@ -60,6 +60,58 @@ export class PracticeComponent implements OnInit {
   changePassword(){
     console.log("inside change password")
     console.log(this.currentUser.email)
+    if(this.pw_current == ""){
+      let dialog = this.dialogRef.open(DialogContentExampleDialog, {
+        data: {
+          message: 'Please enter current password'
+        }
+      });
+      dialog.afterClosed().subscribe(result => {
+        //console.log(`Dialog result: ${result}`);
+      });
+    }
+    else{
+      if(this.pw_new != this.pw_confirm){
+        let dialog = this.dialogRef.open(DialogContentExampleDialog, {
+          data: {
+            message: "Passwords don't match"
+          }
+        });
+        dialog.afterClosed().subscribe(result => {
+          //console.log(`Dialog result: ${result}`);
+        });
+      }
+      else{
+        let encryptedPassword = crypto.AES.encrypt(this.pw_confirm, "MySecretKey").toString();
+        this.dataService.changePassword({uname:this.currentUser.email,cipher:encryptedPassword}).subscribe(result => {
+          console.log(result)
+          if(result.success){
+            let dialog = this.dialogRef.open(DialogContentExampleDialog, {
+              data: {
+                message: result.message
+              }
+            });
+            dialog.afterClosed().subscribe(result => {
+              //console.log(`Dialog result: ${result}`);
+              let isVisible = document.getElementById('signup');
+              isVisible?.style.setProperty('display','none');
+            });
+          }
+          else{
+            let dialog = this.dialogRef.open(DialogContentExampleDialog, {
+              data: {
+                message: result.message
+              }
+            });
+            dialog.afterClosed().subscribe(result => {
+              //console.log(`Dialog result: ${result}`);
+            });
+          }
+          
+        });
+      }
+    }
+    
   }
 
   getAllOrders(){

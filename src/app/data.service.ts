@@ -36,6 +36,10 @@ signUp(data: any): Observable<any>{
   return this.http.request('POST', this.url+'/api/signUp', 
   {responseType:'json', headers: {'Content-Type': 'application/json'},body:data});
 }
+changePassword(data: any): Observable<any>{
+  return this.http.request('POST', this.url+'/api/changePassword', 
+  {responseType:'json', headers: {'Content-Type': 'application/json'},body:data});
+}
 getCurrentUser(){
   return this.currerntUser;
 }

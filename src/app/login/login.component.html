@@ -126,6 +126,12 @@ window.onclick = function(event) {
         <h1 style="color: black;">Sign Up</h1>
         <p style="color: black;">Please fill in this form to create an account.</p>
         <hr>
+        <label style="color: black;" for="email"><b>First Name</b></label>
+        <input type="text" placeholder="Enter First Name" name="fname" [(ngModel)]='fname' required>
+  
+        <label style="color: black;" for="psw"><b>Last Name</b></label>
+        <input type="text" placeholder="Enter Last Name" name="lname" [(ngModel)]='lname' required>
+
         <label style="color: black;" for="email"><b>Email</b></label>
         <input type="text" placeholder="Enter Email" name="email" [(ngModel)]='uname_new' required>
   
@@ -135,9 +141,7 @@ window.onclick = function(event) {
         <label style="color: black;" for="psw-repeat"><b>Repeat Password</b></label>
         <input type="password" placeholder="Repeat Password" name="psw-repeat" [(ngModel)]='pw_repeat' required>
         
-        <label style="color: black;">
-          <input type="checkbox" checked="checked" name="remember" style="margin-bottom:15px"> Remember me
-        </label>
+
   
         <p style="color: black;">By creating an account you agree to our <a href="#" style="color:dodgerblue">Terms & Privacy</a>.</p>
   

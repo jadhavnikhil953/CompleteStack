@@ -71,11 +71,38 @@ router.post('/login',(req, res) => {
 
         var hash = CryptoJS.HmacSHA256(originalPassword, "decryptThisBitch");
         var hashedString = hash.toString(CryptoJS.enc.Base64);
-        Users.insertMany({uname:req.body.uname,firstName:"Temp",lastName:"User",pw:hashedString,isTempPw:true}, (error, result) => {
-            res.send({success:true,message:"User create successfully"});
+        Users.insertMany({uname:req.body.uname,firstName:req.body.firstName,lastName:req.body.lastName,pw:hashedString,isTempPw:true}, (error, result) => {
+            res.send({success:true,message:"User created successfully"});
         });
        }
    });
+ });
+
+ router.post('/changePassword',(req, res) => {
+    //console.log(req.body);
+    Users.find({uname:req.body.uname}, (error, result) => {
+        if(error) {
+            return res.status(500).send(error);
+        }
+        
+        if(result.length>0){
+            var bytes  = CryptoJS.AES.decrypt(req.body.cipher, "MySecretKey");
+            var originalPassword = bytes.toString(CryptoJS.enc.Utf8);
+            var hash = CryptoJS.HmacSHA256(originalPassword, "decryptThisBitch");
+            var hashedString = hash.toString(CryptoJS.enc.Base64);
+
+            Users.findOneAndUpdate({uname:req.body.uname},{pw:hashedString} , (error, result) => {
+                if(error) {
+                    return res.status(500).send(error);
+                }
+                res.send({success:true,message:"Password changed successfully"});
+            })
+        }
+        else{
+            res.send({success:false,message:"User not found"});
+        }
+        
+    });
  });
 
  router.post('/getAllOrders',(req, res) => {

@@ -16,6 +16,9 @@ export class LoginComponent implements OnInit {
   public uname_new: any = "";
   public pw_new: any = "";
   public pw_repeat: any = "";
+  public fname: any = "";
+  public lname: any = "";
+
 
   constructor( private dataService : DataService, private dialogRef : MatDialog, private router : Router) { }
 
@@ -25,7 +28,7 @@ export class LoginComponent implements OnInit {
   signUp(){
     if(this.pw_new == this.pw_repeat){
       let encryptedPassword = crypto.AES.encrypt(this.pw_new, "MySecretKey").toString();
-      this.dataService.signUp({uname:this.uname_new, cipher:encryptedPassword}).subscribe((data:any) =>{
+      this.dataService.signUp({uname:this.uname_new, cipher:encryptedPassword,firstName:this.fname,lastName:this.lname}).subscribe((data:any) =>{
         let dialog = this.dialogRef.open(DialogContentExampleDialog, {
           data: {
             message: data.message
