@@ -91,7 +91,7 @@ export class LoginComponent implements OnInit {
             }
             else{
               this.dataService.setCurrentUser(data.user);
-              this.router.navigate(['practice']);
+              this.router.navigate(['/dashboard']);
             }
           });
         }

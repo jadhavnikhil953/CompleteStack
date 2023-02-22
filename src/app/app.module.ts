@@ -14,12 +14,13 @@ import {MatTableModule} from '@angular/material/table';
 import * as CanvasJSAngularChart from '../assets/canvasjs-3.7.2/canvasjs.angular.component';
 import { LoginComponent } from './login/login.component';
 import {MatMenuModule} from '@angular/material/menu';
+import { DashboardComponent } from './dashboard/dashboard.component';
 var CanvasJSChart = CanvasJSAngularChart.CanvasJSChart;
 
 @NgModule({
   declarations: [
     AppComponent,
-    PracticeComponent,DialogContentExampleDialog,CanvasJSChart, LoginComponent
+    PracticeComponent,DialogContentExampleDialog,CanvasJSChart, LoginComponent, DashboardComponent
   ],
   imports: [
     BrowserModule,
